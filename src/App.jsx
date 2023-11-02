@@ -1,4 +1,4 @@
-import "./App.css";
+import "App.css";
 import { useState } from "react";
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
   const handleForEach = function () {
     let temp = "";
     array.forEach((item, index) => {
-      temp += `${index}: ${item} /`;
+      temp += `${index}: ${item} `;
     });
 
     setResult(temp);
@@ -64,41 +64,41 @@ function App() {
 
   const handleSplice = () => {
     const newArr = [...array];
-    newArr.splice(1, 2, "orange", "melon");
+    newArr.splice(1, 1, query);
     setResult(newArr.join(", "));
   };
 
   const handleIndexOf = () => {
-    const indexOf = array.indexOf("melon");
+    const indexOf = array.indexOf(query);
     setResult(indexOf);
   };
 
   const handleIncludes = () => {
-    const included = array.includes("orange") ? "true" : "false";
+    const included = array.includes(query) ? "true" : "false";
     setResult(included);
   };
 
   const handleFind = () => {
-    const found = array.find((item) => item);
-    setResult(found);
+    const found = array.find((item) => item.includes(query));
+    console.log(found);
+    found !== undefined ? setResult(found) : setResult("Not Found");
   };
 
   const handleSome = () => {
     // 하나라도 true면 true 반환
-    const some = array.some((item) => item === "apple");
+    const some = array.some((item) => item.includes(query));
     setResult(String(some));
   };
 
   const handleEvery = () => {
-    // 모든게 true여야 true 반환
-    const every = array.every((item) => typeof item === "string");
+    // 모든 요소가 true여야 true 반환
+    const every = array.every((item) => item.includes(query));
     setResult(String(every));
   };
 
   const handleSort = () => {
-    const newArr = [...array];
     // 내림차순 정렬
-    const sorted = newArr.sort().reverse();
+    const sorted = array.sort().reverse();
     setResult(sorted.join(", "));
   };
 
